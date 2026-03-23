@@ -17,9 +17,21 @@
         <p>The summary of your answers:</p>
       </div>
       <div id="results-group">
-        <div id="correct-left"></div>
-        <div id="center-results"></div>
-        <div id="wrong-right"></div>
+        <div id="correct-left">
+          <h2>Correct</h2>
+          <div class="percentage cyan-text" id="correct-percent">0%</div>
+          <p id="correct-count">0/0 questions</p>
+        </div>
+        <div id="center-results">
+          <div class="donut-chart" id="donut-chart">
+            <div class="chart-center"></div>
+          </div>
+        </div>
+        <div id="wrong-right">
+          <h2 class="wrong-title">Wrong</h2>
+          <div class="percentage magenta-text" id="wrong-percent">0%</div>
+          <p id="wrong-count">0/0 questions</p>
+        </div>
       </div>
       <button id="rate-us" type="submit">RATE US</button>
     </main>
