@@ -16,7 +16,9 @@ body {
 }
 
 main,
-footer,
+footer {
+  text-align: center;
+}
 header {
   text-align: left;
 }
@@ -63,7 +65,7 @@ h2 {
 
 #banner-extrapage {
   text-align: center;
-  margin-bottom: 2.5em;
+  margin-bottom: 3%;
 }
 
 #pokemon-digimon {
