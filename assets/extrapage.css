@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+body {
+  size: 100%;
+  background-image: url(./bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /* overflow: hidden; */
+  background-size: cover;
+  color: white;
+  text-align: center;
+  margin-left: 4em;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+main,
+footer,
+header {
+  text-align: left;
+}
+strong {
+  font-weight: bold;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 3.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 0.8em;
+  text-align: center;
+}
+
+h2 {
+  color: #d20094;
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 0.7em;
+}
+
+#logo {
+  width: 10%;
+  margin-bottom: 2em;
+  margin-top: 1.8em;
+}
+
+#banner-extrapage {
+  text-align: center;
+  margin-bottom: 2.5em;
+}
+
+#pokemon-digimon {
+  border-radius: 5%;
+  max-width: 35%;
+}
