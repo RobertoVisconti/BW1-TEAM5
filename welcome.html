@@ -3,29 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/welcome.css" />
     <title>Build Week 1 - TEAM 5</title>
   </head>
   <body>
     <header>
       <!-- in header abbiamo h1, e logo -->
-      <h1>Welcome to your exam</h1>
+      <img src="./assets/epicode_logo.png" alt="Logo Epicode" />
+      <h1>Welcome to <br />your exam</h1>
     </header>
     <main>
       <!-- in main istruzione e ul -->
       <section>
-        <h2>Istuction</h2>
+        <h2>Instructions</h2>
         <p>
           We don't expect most engineers to know the answers to all of these
+          <br />
           questions, so don't worry if you're unsure of a few of them.
         </p>
       </section>
       <section>
         <ul>
-          <li>Each question is <strong>timed </strong>and can only be <strong>answered once.</strong></li>
           <li>
-            Changing browser tab or opening other windows <strong>will invalidate the
-            question.</strong>
+            Each question is <strong>timed </strong>and can only be
+            <strong>answered once.</strong>
+          </li>
+          <li>
+            Changing browser tab or opening other windows
+            <strong>will invalidate the question.</strong>
           </li>
           <li>This exam will take approx. <strong>0-5 minutes.</strong></li>
         </ul>
@@ -33,11 +39,15 @@
     </main>
     <footer>
       <!-- in footer checkbox e bottone per iniziare il quiz -->
-       <form action="">
-        <label for="input">
-        <input type="checkbox" required> I promise to answer myself without help from anyone</label>
-        <button>Proceed</button>
-       </form>
+      <form action="">
+        <label for="checkbox">
+          <div id="footer-form">
+            <input id="checkbox" type="checkbox" required />
+            <span>I promise to answer myself without help from anyone </span>
+          </div>
+        </label>
+        <button>PROCEED</button>
+      </form>
     </footer>
     <script src="./scripts/welcome.js"></script>
   </body>
