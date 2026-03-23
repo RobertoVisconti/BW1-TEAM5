@@ -2,19 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 body {
-  max-height: auto;
+  size: 100%;
   background-image: url(./bg.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-size: cover;
   color: white;
   text-align: left;
   margin-left: 4em;
   font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: auto;
-  font-style: normal;
 }
 
 strong {
@@ -23,7 +20,7 @@ strong {
 
 p {
   font-size: 16px;
-  margin-bottom: 2.5em;
+  margin-bottom: 3.5em;
 }
 
 h1,
@@ -41,14 +38,14 @@ h6 {
 h1 {
   font-size: 60px;
   font-weight: bold;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 h2 {
   color: #d20094;
   font-weight: bold;
   font-size: 32px;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
 }
 
 img {
@@ -60,7 +57,7 @@ img {
 ul {
   list-style-type: disc;
   padding-left: 1.5em;
-  margin-bottom: 3.5em;
+  margin-bottom: 5em;
 }
 
 li {
