@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url(./images/bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  background-size: cover;
+  color: white;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: auto;
+  font-style: normal;
+}
+
+header {
+  width: 100%;
+  height: 10%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  width: 10%;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+header #language {
+  width: 5%;
+  margin: 0 20px;
+  text-align: center;
+}
+
+#language img {
+  width: 60%;
+  padding: auto;
+  cursor: pointer;
+}
+
+main {
+  width: 90%;
+  height: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+main button {
+  width: 40%;
+  height: 35%;
+  background-color: rgba(255, 255, 255, 0.173);
+  border: 1px solid white;
+  border-radius: 40px;
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+}
+
+main button:hover {
+  background-color: rgba(255, 255, 255, 0.345);
+  cursor: pointer;
+}
+
+#q-a {
+  width: 100%;
+  height: 70%;
+}
+
+#question {
+  width: 100%;
+  height: 40%;
+  font-size: 30px;
+}
+
+#answers {
+  width: 100%;
+  height: 30%;
+}
+
+#timer {
+  width: 100%;
+  height: 15%;
+}
+
+#bottom-div {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#nextQuestion {
+  width: 20%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid white;
+  border-radius: 0%;
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+}
+
+footer {
+  width: 100%;
+  height: 10%;
+}

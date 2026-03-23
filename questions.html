@@ -1,16 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./assets/Poké_Ball_icon.svg.png">
-    <title>Questions</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Benchmark</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="./assets/questions.css" />
   </head>
   <body>
+    <header>
+      <img src="./assets/images/epicode_logo.png" alt="" />
+      <div id="language">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg"
+          alt="italian"
+        />
+      </div>
+    </header>
     <main>
-      <h1>Domanda 1</h1>
+      <div id="timer">timer</div>
+      <div id="q-a">
+        <p id="question">Question</p>
+        <div id="answers">
+          <button class="answer">Answer1</button>
+          <button class="answer">Answer2</button>
+          <button class="answer">Answer3</button>
+          <button class="answer">Answer4</button>
+        </div>
+      </div>
+      <div id="bottom-div">
+        <p id="questions-left">(questions left)</p>
+        <button id="nextQuestion">Next</button>
+      </div>
     </main>
-    <script src="./welcome.html"></script>
-    <script src="./questions.html"></script>
+    <footer></footer>
+    <script src="questions.js" async defer></script>
+    >>>>>>> tancredi-questions.html
   </body>
 </html>
