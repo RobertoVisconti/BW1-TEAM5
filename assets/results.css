@@ -17,8 +17,8 @@ body {
 
 header {
   text-align: left;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  margin-top: 1em;
+  margin-bottom: 2em;
   margin-left: 4em;
 }
 
@@ -44,6 +44,10 @@ p {
   color: white;
 }
 
+#title-page {
+  margin-bottom: 2em;
+}
+
 #logo {
   width: 10%;
 }
@@ -52,6 +56,7 @@ p {
   margin-bottom: 2em;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .donut-chart {
