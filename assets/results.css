@@ -7,41 +7,13 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: auto;
-  font-style: normal;
-  font-size: 16px;
-}
-
-header {
-  text-align: left;
-  margin-top: 1em;
-  margin-bottom: 2em;
-  margin-left: 4em;
-}
-
-h1 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
-  font-size: 60px;
-  color: white;
 }
 
 h2 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
-  font-size: 40px;
   color: white;
 }
-
-p {
-  color: white;
+img {
+  margin-left: 2em;
 }
 
 #title-page {
@@ -104,19 +76,15 @@ p {
   color: #00ffff;
   margin-bottom: 5px;
 }
-.chart-content p {
-  font-size: 0.8rem;
-}
 
 .cyan-text {
-  color: #00ffff !important; /* Ciano brillante */
+  color: #00ffff;
 }
 
 .magenta-text {
-  color: #d21480 !important; /* Magenta scuro */
+  color: #d21480;
 }
 
-/* Stile per il testo descrittivo piccolo al centro */
 .small-text {
   font-size: 0.8rem;
   opacity: 0.8;
@@ -124,7 +92,7 @@ p {
 }
 
 #position-btn {
-  margin-left: 1em;
+  margin-left: 0.5em;
 }
 
 p.small-text,
