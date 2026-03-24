@@ -1,8 +1,8 @@
 // 1. Recupero i dati dalla pagina del questionario ( per il momento c'è una prova)
 const results = JSON.parse(localStorage.getItem("quizResults")) || {
   totalQuestions: 10,
-  correctAnswers: 7,
-  wrongAnswers: 3,
+  correctAnswers: 3,
+  wrongAnswers: 7,
 };
 
 const rateBtn = document.getElementById("rate-us");
@@ -48,9 +48,9 @@ rateBtn.addEventListener("click", function () {
       // In caso di fallimento ( Prof. Stefano con i suoi gatti ha vinto ancora)
       chartContent.innerHTML =
         "<h3 class='magenta-text'>Game Over… 💀</h3>" +
-        "<p>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
+        "<p class='small-text'>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
         "<p class='magenta-text'>made entirely of cats with OP moves</p>" +
-        "<p class='small-text italic'>Prof. Stefano, while petting a cat, whispered: “You’re not ready yet. Try again!!!”</p>";
+        "<p class='small-text'>Prof. Stefano, while petting a cat, whispered: “You’re not ready yet. Try again!!!”</p>";
 
       this.innerText = "TRY AGAIN";
       this.style.borderColor = "#d21480";

@@ -53,8 +53,7 @@ h1 {
 h2 {
   color: #d20094;
   font-weight: bold;
-  font-size: 32px;
-  margin-bottom: 0.7em;
+  font-size: 40px;
 }
 
 #logo {
@@ -72,4 +71,34 @@ h2 {
   border-radius: 5%;
   max-width: 35%;
   margin-bottom: 3em;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.548);
+}
+
+.box-feedback {
+  size: 100%;
+  border: 2px solid white;
+  border-radius: 1.5em;
+  margin: 1.5em;
+  color: white;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.74);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.box-feedback p,
+h2,
+span {
+  margin: 0;
+}
+
+.box-feedback p {
+  margin-bottom: 1em;
+}
+
+.box-feedback h2 {
+  margin-bottom: 0.3em;
 }
