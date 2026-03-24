@@ -13,15 +13,15 @@ body{
     font-style: normal;
     font-size: 30px;
     text-align: center;
+    line-height: 1.5em;
 }
 #logo{
     text-align: start;
-  
 }
 img{
     width: 10%;
     margin-top: 3em;
-    margin-bottom: 4em;
+    margin-bottom: 3em;
     margin-left: 4em;
 }
 #title{
@@ -39,7 +39,7 @@ img{
 }
 label{
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     text-align: center;
 }
 button{
@@ -55,5 +55,29 @@ button{
 }
 div{
     display: inline-block;
-    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 4em;
+}
+#secondText{
+    margin-bottom: 2em;
+}
+#comment{
+    border: none;
+    border-bottom: 2px solid#d20094;
+    width: 50%;
+    height: 2em;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    padding-left: 2em;
+    outline: none;
+}
+.star {
+  font-size: 60px;
+  cursor: pointer;
+  color: #080311; 
+  margin: 0 5px;
+}
+.active, .star:hover {
+  color: #a0ffff; 
 }

@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/Poké_Ball_icon.svg.png"
+    />
     <title>Feedback</title>
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/feedback.css" />
@@ -20,27 +25,33 @@
         </p>
       </section>
       <section id="secondSection">
-        <div><img src="./assets/star.svg" alt="rate" width="10%" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
-        <div><img src="./assets/star.svg" alt="rate" /></div>
+        <div class="rating-container" id="rating">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+          <span class="star" data-value="6">&#9733;</span>
+          <span class="star" data-value="7">&#9733;</span>
+          <span class="star" data-value="8">&#9733;</span>
+          <span class="star" data-value="9">&#9733;</span>
+          <span class="star" data-value="10">&#9733;</span>
+        </div>
       </section>
       <section id="thirdSection">
-        <p>Leave us an open feedback about your experience so far</p>
-        <label>
-          <input
-            id="comment"
-            type="text"
-            placeholder="Write your comment here"
-          />
-        </label>
-        <button id="btn" type="submit">MORE INFO</button>
+        <p id="secondText">
+          Leave us an open feedback about your experience so far
+        </p>
+        <form>
+          <label>
+            <input
+              id="comment"
+              type="text"
+              placeholder="Write your comment here"
+            />
+          </label>
+          <button id="btn" type="submit">MORE INFO</button>
+        </form>
       </section>
     </main>
     <script src="./scripts/feedback.js"></script>

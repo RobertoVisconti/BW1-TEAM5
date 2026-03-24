@@ -17,8 +17,8 @@ body {
 
 header {
   text-align: left;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  margin-top: 1em;
+  margin-bottom: 2em;
   margin-left: 4em;
 }
 
@@ -31,20 +31,96 @@ h1 {
   color: white;
 }
 
+h2 {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 40px;
+  color: white;
+}
+
 p {
   color: white;
+}
+
+#title-page {
+  margin-bottom: 2em;
 }
 
 #logo {
   width: 10%;
 }
 
-#tytle-page {
-  margin-bottom: 2em;
-}
-
 #results-group {
   margin-bottom: 2em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.donut-chart {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: conic-gradient(#00ffff 0% 66.7%, #d21480 66.7% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  text-align: center;
+}
+
+.percentage {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.chart-center {
+  width: 190px;
+  height: 190px;
+  background-color: #000835;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  font-size: 0.8rem;
+}
+
+.status-text {
+  color: #00ffff;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.chart-text-content h3 {
+  color: #00ffff;
+  margin-bottom: 5px;
+}
+.chart-text-content p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.cyan-text {
+  color: #00ffff !important; /* Ciano brillante */
+}
+
+.magenta-text {
+  color: #d21480 !important; /* Magenta scuro */
+}
+
+/* Stile per il testo descrittivo piccolo al centro */
+.small-text {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 5px;
 }
 
 button {
