@@ -94,3 +94,8 @@ nextQuestionButton.addEventListener("click", function() {
     storeResult()
     getNextQuestion()
 })
+
+
+
+// TIMER
+
