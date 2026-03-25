@@ -190,7 +190,9 @@ const buttons = [...answersDiv.querySelectorAll("button")]
 
 let  currentQuestion = 0
 
-let score = 0 
+let correctAnswers = 0 
+
+let wrongAnswers = 0
 
 const resultsArray = []
 
@@ -241,7 +243,7 @@ const updateScore = function(selectedAnswer, index) {
     
     if (selectedAnswer === questions[currentLang][index].rightAnswer) {
 
-        score ++
+        correctAnswers ++
 
         let answerData = {
             text : questions[currentLang][index].text,
@@ -252,10 +254,12 @@ const updateScore = function(selectedAnswer, index) {
         }
 
         console.log(answerData)
-        resultsArray.push(answerData) 
+        resultsArray.push(answerData)
 
     } else if (!selectedAnswer) {
 
+        wrongAnswers++
+        
         let answerData = {
             text : questions[currentLang][index].text,
             selected: null, 
@@ -263,10 +267,14 @@ const updateScore = function(selectedAnswer, index) {
             correct: questions[currentLang][index].rightAnswer,
             score: 0
         }
+
         console.log(answerData)
         resultsArray.push(answerData)
+        
 
     } else {
+
+        wrongAnswers++
 
         let answerData = {
             text : questions[currentLang][index].text,
@@ -275,11 +283,11 @@ const updateScore = function(selectedAnswer, index) {
             correct: questions[currentLang][index].rightAnswer,
             score: 0
         }
+
         console.log(answerData)
         resultsArray.push(answerData)
-        
-    }
 
+    }
 
 }
 
@@ -308,10 +316,10 @@ const getNextQuestion = function(n) {
         }))
 
         buttons.forEach((button) => button.addEventListener("focusout", function(e) {
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
             answerIsSelected = false;
             selectedAnswer = null;
+            console.log(answerIsSelected)
+            console.log(selectedAnswer)
         }))
 
         startTimer();
