@@ -164,6 +164,13 @@ const englishQuestionsArray = [
   }
 ];
 
+let currentLang = "it"
+
+const questions = {
+    it: questionsArray,
+    en: englishQuestionsArray
+}
+
 const language = document.getElementById("language")
 
 const questionText = document.getElementById("question")
@@ -174,11 +181,21 @@ const remainingQuestions = document.getElementById("questions-left")
 
 const customAlert = document.getElementById("customAlert")
 
+if (currentLang === "en") {
+    customAlert.innerHTML = `<p>Are you sure you want to leave this question unanswered? You won't score any points.</p>
+          <button id="skipQuestion">Skip</button>
+          <button id="resumeQuestion">Resume</button>`
+    } else if (currentLang === "it") {
+        customAlert.innerHTML = `<p>Sei sicuro di voler lasciare questa domanda senza risposta? Non otterrai alcun punteggio.</p>
+          <button id="skipQuestion">Lascia</button>
+          <button id="resumeQuestion">Riprendi</button>`
+    }
+
 const nextQuestionButton = document.getElementById("nextQuestion")
 
 const buttons = [...answersDiv.querySelectorAll("button")]
 
-let  currentQuestion = 1
+let  currentQuestion = 0
 
 let score = 0 
 
@@ -188,18 +205,50 @@ let answerIsSelected = false;
 
 let selectedAnswer = null; 
 
+const finalResults = {
+
+}
+
 buttons.forEach((button) => button.addEventListener("click", function(e) {        // add event listeners to the buttons
     answerIsSelected = true;
     selectedAnswer = e.target.innerText;
     customAlert.style.display = "none";        // alert hidden
 }))
 
+const changeLanguage = function(index) {
+
+    if (currentLang === "it") {
+
+        currentLang = "en"
+        language.innerHTML = `<span class="fi fi-gb"></span>`
+        
+        questionText.innerText = questions[currentLang][index].text  // translate question
+
+        for (let i = 0; i < buttons.length; i++) {         // translate answers
+            buttons[i].innerText = questions[currentLang][index].answers[i]
+        }
+
+    } else if (currentLang === "en") {
+
+        currentLang = "it"
+        language.innerHTML = `<span class="fi fi-it"></span>`
+
+        questionText.innerText = questions[currentLang][index].text // translate question
+
+        for (let i = 0; i < buttons.length; i++) {       //translate answers
+            buttons[i].innerText = questions[currentLang][index].answers[i]
+        }
+
+    }
+}
+
 language.addEventListener("click", function() {
-    // toggle language
+    changeLanguage(currentQuestion)
 })
 
 const finishQuiz = function() {
-    // redirect to result page
+
+        
 }
 
 const reloadTimer = function() {
@@ -208,39 +257,66 @@ const reloadTimer = function() {
 
 const updateScore = function(selectedAnswer, index) {
     
-    if (selectedAnswer === questionsArray[index].rightAnswer) {
+    if (selectedAnswer === questions[currentLang][index].rightAnswer) {
 
         score ++
 
-        resultsArray.push("correct")
+        let answerData = {
+            text : questions[currentLang][index].text,
+            selected: selectedAnswer, 
+            result: "correct",
+            correct: questions[currentLang][index].rightAnswer,
+            score: 1
+        }
+
+        console.log(answerData)
+        resultsArray.push(answerData) 
+
+    } else if (!selectedAnswer) {
+
+        let answerData = {
+            text : questions[currentLang][index].text,
+            selected: null, 
+            result: "wrong",
+            correct: questions[currentLang][index].rightAnswer,
+            score: 0
+        }
+        console.log(answerData)
+        resultsArray.push(answerData)
 
     } else {
 
-        resultsArray.push("wrong")
-
+        let answerData = {
+            text : questions[currentLang][index].text,
+            selected: selectedAnswer, 
+            result: "wrong",
+            correct: questions[currentLang][index].rightAnswer,
+            score: 0
+        }
+        console.log(answerData)
+        resultsArray.push(answerData)
+        
     }
+
 }
 
 const getNextQuestion = function(n) {
-
-    console.log(answerIsSelected)
-    console.log(selectedAnswer)
-    console.log(resultsArray)
-    console.log(score)
 
     answerIsSelected = false
 
     selectedAnswer = null;
 
-    if (n <= questionsArray.length) {
+    const currentSet = questions[currentLang]
 
-        questionText.innerText = questionsArray[n].text         //update question
+    if (n < currentSet.length) {
+
+        questionText.innerText = currentSet[n].text         //update question
            
         for (let i = 0; i < buttons.length; i++) {              // update answers
-            buttons[i].innerText = questionsArray[n].answers[i]
+            buttons[i].innerText = currentSet[n].answers[i]
         }
 
-        remainingQuestions.innerHTML = `${currentQuestion}/${questionsArray.length}` // update remaining questions index
+        remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}` // update remaining questions index
 
     } else {
 
@@ -255,7 +331,7 @@ const getNextQuestion = function(n) {
 const skip = document.getElementById("skipQuestion")     // alert button for skipping current question
 skip.addEventListener("click", function() {
     customAlert.style.display = "none"
-    resultsArray.push("wrong")
+    updateScore(selectedAnswer, currentQuestion)
     currentQuestion++
     getNextQuestion(currentQuestion)
 })
@@ -267,17 +343,43 @@ resume.addEventListener("click", function() {
 
 
 nextQuestionButton.addEventListener("click", function() {       // add event listener to next question button
+
     if (answerIsSelected) {
         updateScore(selectedAnswer, currentQuestion)
         currentQuestion++
         getNextQuestion(currentQuestion)
     } else {
-        customAlert.style.display = "block"
+        if (currentLang === "en") {
+            customAlert.innerHTML = `<p>Are you sure you want to leave this question unanswered? You won't score any points.</p>
+          <button id="skipQuestion">Skip</button>
+          <button id="resumeQuestion">Resume</button>`
+        } else if (currentLang === "it") {
+        customAlert.innerHTML = `<p>Sei sicuro di voler lasciare questa domanda senza risposta? Non otterrai alcun punteggio.</p>
+          <button id="skipQuestion">Lascia</button>
+          <button id="resumeQuestion">Riprendi</button>`
+        }   
+
+    customAlert.style.display = "block"
+
+    const skip = document.getElementById("skipQuestion")     // alert button for skipping current question
+    skip.addEventListener("click", function() {
+        customAlert.style.display = "none"
+        updateScore(selectedAnswer, currentQuestion)
+        currentQuestion++
+        getNextQuestion(currentQuestion)
+    })
+
+    const resume = document.getElementById("resumeQuestion")        //alert button for resuming current question       
+    resume.addEventListener("click", function() {
+        customAlert.style.display = "none"
+    })
+
     }
+
 })
 
 
-getNextQuestion(currentQuestion);
+getNextQuestion(currentQuestion)
 
 
 

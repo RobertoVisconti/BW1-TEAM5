@@ -40,15 +40,20 @@ header img {
 }
 
 header #language {
-  width: 5%;
+  width: 40px;
+  height: 30px;
   margin: 0 20px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#language img {
-  width: 60%;
-  padding: auto;
+#language span {
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+  border: 2px solid black;
 }
 
 .timer {

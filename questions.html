@@ -11,25 +11,15 @@
       type="image/x-icon"
       href="./assets/Poké_Ball_icon.svg.png"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <link rel="stylesheet" href="/assets/reset.css" />
     <link rel="stylesheet" href="./assets/questions.css" />
   </head>
   <body>
     <header>
-      <img src="./assets/images/epicode_logo.png" alt="" />
+      <img src="./assets/images/epicode_logo.png" alt="epicode-logo" />
       <div id="language">
-        <img
-          id="italian-lang"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg"
-          alt="italian"
-          style="display: none"
-        />
-        <img
-          id="english-lang"
-          src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
-          alt="english"
-          style="display: none"
-        />
+        <span class="fi fi-it"></span>
       </div>
     </header>
     <main>
@@ -54,14 +44,9 @@
         <p id="questions-left">(questions left)</p>
         <button id="nextQuestion">Next</button>
       </div>
-      <div id="customAlert">
-          <p id="">Are you sure you want to leave this question unanswered? You won't score any points.</p>
-          <button id="skipQuestion">Skip</button>
-          <button id="resumeQuestion">Resume</button>
-      </div>
+      <div id="customAlert"></div>
     </main>
     <footer></footer>
     <script src="./scripts/questions.js" async defer></script>
-    <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
   </body>
 </html>
