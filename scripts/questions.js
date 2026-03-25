@@ -205,21 +205,6 @@ const finalResults = {
 
 }
 
-        buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
-            answerIsSelected = true;
-            selectedAnswer = e.target.innerText;
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-            customAlert.style.display = "none";        // alert hidden
-        }))
-
-        buttons.forEach((button) => button.addEventListener("focusout", function(e) {
-            answerIsSelected = false;
-            selectedAnswer = null;
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-        }))
-
 const changeLanguage = function(index) {
 
     if (currentLang === "it") {
@@ -319,9 +304,9 @@ const getNextQuestion = function(n) {
 
         questionText.innerText = currentSet[n].text         //update question
            
-        for (let i = 0; i < buttons.length; i++) {  
-                        // update answers
+        for (let i = 0; i < buttons.length; i++) {  // update 
             buttons[i].innerText = currentSet[n].answers[i]
+
             buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
                 answerIsSelected = true;
                 selectedAnswer = e.target.innerText;
