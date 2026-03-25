@@ -5,9 +5,59 @@ document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("btn");
   const alertBox = document.getElementById("alert-checkbox");
 
-  // Funzione che gestisce il click sul bottone
+  // CONFIGURAZIONE PIOGGIA
+  const rainImageUrl = "./assets/images/stefano.png";
+  let rainInterval;
+
+  // Funzione per creare un singolo elemento della pioggia
+  function createRainDrop() {
+    const drop = document.createElement("img");
+    drop.src = rainImageUrl;
+    drop.classList.add("rain-drop");
+
+    // CORREZIONE: Usiamo 'left' per distribuire le immagini orizzontalmente
+    drop.style.left = Math.random() * 100 + "vw";
+
+    // Dimensione casuale leggera per dare profondità
+    const size = Math.random() * (35 - 20) + 20;
+    drop.style.width = size + "px";
+
+    // Durata dell'animazione casuale (velocità di caduta)
+    const duration = Math.random() * (4 - 2) + 2;
+    drop.style.animationDuration = duration + "s";
+
+    // Aggiungiamo l'elemento al body
+    document.body.appendChild(drop);
+
+    // Rimuoviamo l'elemento dal DOM dopo che l'animazione è finita
+    setTimeout(function () {
+      drop.remove();
+    }, duration * 1000);
+  }
+
+  // Funzione per avviare/fermare la pioggia in base alla checkbox
+  function toggleRain() {
+    if (checkbox.checked) {
+      // 1. Avvia la pioggia creando un'immagine ogni 150ms
+      createRainDrop();
+      rainInterval = setInterval(createRainDrop, 150);
+
+      // 2. LOGICA 5 SECONDI: Stop automatico della generazione
+      setTimeout(function () {
+        clearInterval(rainInterval);
+        console.log("Generazione pioggia terminata dopo 5 secondi");
+      }, 5000);
+    } else {
+      // Se l'utente toglie la spunta manualmente, ferma subito
+      clearInterval(rainInterval);
+    }
+  }
+
+  // Ascolta il cambiamento di stato della checkbox per la pioggia
+  checkbox.addEventListener("change", toggleRain);
+
+  // Gestione del click sul bottone
   btn.addEventListener("click", function () {
-    // Se la checkbox NON è spuntata
     if (!checkbox.checked) {
       // Mostra l'alert (fumetto)
       alertBox.classList.add("alert-visible");
@@ -17,14 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
         alertBox.classList.remove("alert-visible");
       }, 3000);
     } else {
-      // Se la checkbox è spuntata, attiva l'effetto e cambia pagina
-
-      // Aggiunge l'effetto ingrandimento (classe definita nel CSS)
+      // Attiva l'effetto ingrandimento e cambia pagina
       btn.classList.add("btn-expand");
 
-      // Aspetta 500ms per far finire l'animazione e poi cambia pagina
       setTimeout(function () {
-        // Sostituisci con il nome del tuo file HTML di destinazione
         window.location.href = "welcome.html";
       }, 500);
     }
