@@ -80,22 +80,109 @@ const questionText = document.getElementById("question")
 
 const answersDiv = document.getElementById("answers")
 
-const storeResult = function() {
-    
-}
+const remainingQuestions = document.getElementById("questions-left")
 
-const getNextQuestion = function() {
-
-}
+const customAlert = document.getElementById("customAlert")
 
 const nextQuestionButton = document.getElementById("nextQuestion")
 
-nextQuestionButton.addEventListener("click", function() {
-    storeResult()
-    getNextQuestion()
+const buttons = [...answersDiv.querySelectorAll("button")]
+
+let  currentQuestion = 1
+
+let score = 0 
+
+const resultsArray = []
+
+let answerIsSelected = false;
+
+let selectedAnswer = null; 
+
+buttons.forEach((button) => button.addEventListener("click", function(e) {        // add event listeners to the buttons
+    answerIsSelected = true;
+    selectedAnswer = e.target.innerText;
+    customAlert.style.display = "none";             // alert hidden
+}))
+
+const finishQuiz = function() {
+    // redirect to result page
+}
+
+const reloadTimer = function() {
+    // reload timer
+}
+
+const updateScore = function(selectedAnswer, index) {
+    
+    if (selectedAnswer === questionsArray[index].rightAnswer) {
+
+        score ++
+
+        resultsArray.push("correct")
+
+    } else {
+
+        resultsArray.push("wrong")
+
+    }
+}
+
+const getNextQuestion = function(n) {
+
+    console.log(answerIsSelected)
+    console.log(selectedAnswer)
+    console.log(resultsArray)
+    console.log(score)
+
+    answerIsSelected = false
+
+    selectedAnswer = null;
+
+    if (n <= questionsArray.length) {
+
+        questionText.innerText = questionsArray[n].text         //update question
+           
+        for (let i = 0; i < buttons.length; i++) {              // update answers
+            buttons[i].innerText = questionsArray[n].answers[i]
+        }
+
+        remainingQuestions.innerHTML = `${currentQuestion}/${questionsArray.length}` // update remaining questions index
+
+    } else {
+
+        finishQuiz()
+
+    }
+
+    reloadTimer()
+}
+
+
+const skip = document.getElementById("skipQuestion")     // alert button for skipping current question
+skip.addEventListener("click", function() {
+    customAlert.style.display = "none"
+    resultsArray.push("wrong")
+    currentQuestion++
+    getNextQuestion(currentQuestion)
+})
+
+const resume = document.getElementById("resumeQuestion")        //alert button for resuming current question       
+resume.addEventListener("click", function() {
+    customAlert.style.display = "none"
 })
 
 
+nextQuestionButton.addEventListener("click", function() {       // add event listener to next question button
+    if (answerIsSelected) {
+        updateScore(selectedAnswer, currentQuestion)
+        currentQuestion++
+        getNextQuestion(currentQuestion)
+    } else {
+        customAlert.style.display = "block"
+    }
+})
 
-// TIMER
+
+getNextQuestion(currentQuestion);
+
 
