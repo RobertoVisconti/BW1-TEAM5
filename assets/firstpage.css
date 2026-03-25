@@ -9,7 +9,7 @@ h1 {
 
 footer p {
   font-size: 14px;
-  padding: 0.5em;
+  padding: 0.8em;
 }
 
 /* CSS START  */
@@ -71,10 +71,10 @@ footer p {
   /* Position on checkbox */
   position: absolute;
   z-index: 100;
-  bottom: 140%; /* Lo alza sopra la riga della checkbox */
-  left: -10px; /* Allineato all'inizio del quadratino */
+  bottom: 140%;
+  left: -10px;
 
-  display: none; /* Gestito da JS tramite .alert-visible */
+  display: none;
   align-items: center;
   width: max-content;
 }
@@ -167,10 +167,10 @@ footer p {
 
 .rain-drop {
   position: fixed;
-  top: -60px; /* Parte da sopra lo schermo */
+  top: -60px;
   z-index: 9999;
-  pointer-events: none; /* Non disturba i click dell'utente */
-  width: 100em; /* Regola la grandezza delle immagini che cadono */
+  pointer-events: none;
+  width: 60px;
   animation-name: fallAnimation;
   animation-timing-function: linear;
 }
