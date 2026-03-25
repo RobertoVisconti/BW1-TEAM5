@@ -336,8 +336,9 @@ const getNextQuestion = function(n) {
                 answerIsSelected = false;
                 selectedAnswer = null;
         }))
-        
+
         }
+
         startTimer();
 
         remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}` // update remaining questions index
