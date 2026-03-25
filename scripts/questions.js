@@ -305,27 +305,27 @@ const getNextQuestion = function(n) {
            
         for (let i = 0; i < buttons.length; i++) {              // update answers
             buttons[i].innerText = currentSet[n].answers[i]
+
+            buttons[i].addEventListener("focus", function(e) {        // add event listeners to the answers buttons
+                answerIsSelected = true;
+                selectedAnswer = e.target.innerText;
+                console.log(answerIsSelected)
+                console.log(selectedAnswer)
+                customAlert.style.display = "none";        // alert hidden
+            })
+
+            buttons.forEach((button) => button.addEventListener("focusout", function(e) {
+                answerIsSelected = false;
+                selectedAnswer = null;
+                console.log(answerIsSelected)
+                console.log(selectedAnswer)
+            }))
+
         }
-
-        buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
-            answerIsSelected = true;
-            selectedAnswer = e.target.innerText;
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-            customAlert.style.display = "none";        // alert hidden
-        }))
-
-        buttons.forEach((button) => button.addEventListener("focusout", function(e) {
-            answerIsSelected = false;
-            selectedAnswer = null;
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-        }))
 
         startTimer();
 
         remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}` // update remaining questions index
-
 
     } else {
 
