@@ -1,15 +1,13 @@
-// Aspettiamo che il documento sia caricato
 document.addEventListener("DOMContentLoaded", function () {
-  // Recuperiamo gli elementi dagli ID del tuo HTML
   const checkbox = document.getElementById("check");
   const btn = document.getElementById("btn");
   const alertBox = document.getElementById("alert-checkbox");
 
-  // Funzione che gestisce il click sul bottone
+  // btn click
   btn.addEventListener("click", function () {
-    // Se la checkbox NON è spuntata
+    // checkbox
     if (!checkbox.checked) {
-      // Mostra l'alert (fumetto)
+      // alert
       alertBox.classList.add("alert-visible");
 
       // Nascondilo dopo 3 secondi
@@ -19,12 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       // Se la checkbox è spuntata, attiva l'effetto e cambia pagina
 
-      // Aggiunge l'effetto ingrandimento (classe definita nel CSS)
+      // effetto ingrandimento
       btn.classList.add("btn-expand");
 
-      // Aspetta 500ms per far finire l'animazione e poi cambia pagina
+      // time animation
       setTimeout(function () {
-        // Sostituisci con il nome del tuo file HTML di destinazione
         window.location.href = "welcome.html";
       }, 500);
     }
