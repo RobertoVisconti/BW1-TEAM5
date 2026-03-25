@@ -237,7 +237,8 @@ language.addEventListener("click", function() {
 })
 
 const finishQuiz = function() {
-   alert(resultsArray)
+   const jsonData = JSON.stringify(resultsArray);
+   console.log(jsonData)
 }
 
 const updateScore = function(selectedAnswer, index) {
@@ -297,6 +298,8 @@ const getNextQuestion = function(n) {
     answerIsSelected = false
 
     selectedAnswer = null;
+
+    customAlert.style.display = "none"; 
 
     const currentSet = questions[currentLang]
 
