@@ -188,9 +188,12 @@ const nextQuestionButton = document.getElementById("nextQuestion")
 
 const buttons = [...answersDiv.querySelectorAll("button")]
 
+
 let  currentQuestion = 0
 
-let score = 0 
+let correctAnswers = 0
+
+let wrongAnswers = 0
 
 const resultsArray = []
 
@@ -201,6 +204,21 @@ let selectedAnswer = null;
 const finalResults = {
 
 }
+
+        buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
+            answerIsSelected = true;
+            selectedAnswer = e.target.innerText;
+            console.log(answerIsSelected)
+            console.log(selectedAnswer)
+            customAlert.style.display = "none";        // alert hidden
+        }))
+
+        buttons.forEach((button) => button.addEventListener("focusout", function(e) {
+            answerIsSelected = false;
+            selectedAnswer = null;
+            console.log(answerIsSelected)
+            console.log(selectedAnswer)
+        }))
 
 const changeLanguage = function(index) {
 
@@ -241,7 +259,7 @@ const updateScore = function(selectedAnswer, index) {
     
     if (selectedAnswer === questions[currentLang][index].rightAnswer) {
 
-        score ++
+        correctAnswers ++
 
         let answerData = {
             text : questions[currentLang][index].text,
@@ -256,6 +274,8 @@ const updateScore = function(selectedAnswer, index) {
 
     } else if (!selectedAnswer) {
 
+        wrongAnswers ++
+
         let answerData = {
             text : questions[currentLang][index].text,
             selected: null, 
@@ -263,10 +283,13 @@ const updateScore = function(selectedAnswer, index) {
             correct: questions[currentLang][index].rightAnswer,
             score: 0
         }
+
         console.log(answerData)
         resultsArray.push(answerData)
 
-    } else {
+    } else if (selectedAnswer !== questions[currentLang][index].rightAnswer) {
+
+        wrongAnswers ++
 
         let answerData = {
             text : questions[currentLang][index].text,
@@ -275,11 +298,11 @@ const updateScore = function(selectedAnswer, index) {
             correct: questions[currentLang][index].rightAnswer,
             score: 0
         }
+
         console.log(answerData)
         resultsArray.push(answerData)
         
     }
-
 
 }
 
@@ -299,20 +322,6 @@ const getNextQuestion = function(n) {
             buttons[i].innerText = currentSet[n].answers[i]
         }
 
-        buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
-            answerIsSelected = true;
-            selectedAnswer = e.target.innerText;
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-            customAlert.style.display = "none";        // alert hidden
-        }))
-
-        buttons.forEach((button) => button.addEventListener("focusout", function(e) {
-            console.log(answerIsSelected)
-            console.log(selectedAnswer)
-            answerIsSelected = false;
-            selectedAnswer = null;
-        }))
 
         startTimer();
 
@@ -329,10 +338,13 @@ const getNextQuestion = function(n) {
 nextQuestionButton.addEventListener("click", function() {       // add event listener to next question button
 
     if (answerIsSelected) {
+        
         updateScore(selectedAnswer, currentQuestion)
-        currentQuestion++
+        currentQuestion++ 
         getNextQuestion(currentQuestion)
+
     } else {
+
         if (currentLang === "en") {
             customAlert.innerHTML = `<p>Are you sure you want to leave this question unanswered? You won't score any points.</p>
           <button id="skipQuestion">Skip</button>
@@ -362,6 +374,7 @@ nextQuestionButton.addEventListener("click", function() {       // add event lis
 
 })
 
+
 // TIMER
 
 const FULL_DASH_ARRAY = 282.743;
@@ -369,7 +382,6 @@ const TIME_LIMIT = 30;
 let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 
-// 1. Sposta la variabile qui fuori (inizialmente vuota)
 let timerInterval; 
 
 const timerText = document.getElementById("timer-text");
@@ -381,7 +393,7 @@ function setCircleDashoffset() {
 }
 
 function startTimer() {
-  // 2. FERMA assolutamente ogni timer attivo prima di iniziarne uno nuovo
+
   clearInterval(timerInterval); 
 
   timePassed = 0;
@@ -389,7 +401,6 @@ function startTimer() {
   timerText.textContent = timeLeft;
   progressRing.style.strokeDashoffset = 0;
 
-  // 3. Assegna il nuovo intervallo alla variabile globale
   timerInterval = setInterval(() => {
     timePassed++;
     timeLeft = TIME_LIMIT - timePassed;
