@@ -3,16 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Benchmark</title>
+    <title>Build Week 1 Team 5</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <link
       rel="icon"
       type="image/x-icon"
-      href="./assets/Poké_Ball_icon.svg.png"
+      href="./assets/images/Poké_Ball_icon.svg.png"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
-    <link rel="stylesheet" href="/assets/reset.css" />
+    <link rel="stylesheet" href="./assets/reset.css" />
+    <link rel="stylesheet" href="./assets/normalize.css" />
     <link rel="stylesheet" href="./assets/questions.css" />
   </head>
   <body>
@@ -24,7 +25,44 @@
     </header>
     <main>
        <div class="timer">
-        
+        <div id="timer-container">
+          <svg id="timer-svg" width="100" height="100" viewBox="0 0 120 120">
+            <circle
+              cx="60"
+              cy="60"
+              r="45"
+              stroke="#ddd"
+              stroke-width="12"
+              fill="none"
+            />
+            <circle
+                id="progress-ring"
+                cx="60"
+                cy="60"
+                r="45"
+                stroke="#9c27b0"
+                stroke-width="12"
+                fill="none"
+                stroke-linecap="round"
+                transform="rotate(-90 60 60)"
+                stroke-dasharray="282.743"
+                stroke-dashoffset="0"
+            />
+            <text
+              id="timer-text"
+              x="50%"
+              y="50%"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="32"
+              fill="#fff"
+            >
+              30
+            </text>
+          </svg>
+        </div>
+
+
        </div>
       <div id="q-a">
         <div id="question">
