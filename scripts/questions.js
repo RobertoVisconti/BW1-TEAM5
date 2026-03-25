@@ -1,3 +1,13 @@
+// timer
+
+
+
+
+
+
+
+//main functionalities
+
 const questionsArray = [
   {
     text: "Chi è il protagonista principale dell’anime di Pokémon?",
@@ -76,6 +86,86 @@ const questionsArray = [
   }
 ];
 
+const englishQuestionsArray = [
+  {
+    text: "Who is the main protagonist of the Pokémon anime?",
+    answers: ["Brock", "Ash Ketchum", "Gary Oak", "Tracey Sketchit"],
+    rightAnswer: "Ash Ketchum"
+  },
+  {
+    text: "Which is the Fire-type starter Pokémon in the first generation?",
+    answers: ["Charmander", "Vulpix", "Growlithe", "Flareon"],
+    rightAnswer: "Charmander"
+  },
+  {
+    text: "What is the name of the professor who gives Ash his first Pokémon?",
+    answers: ["Professor Elm", "Professor Birch", "Professor Oak", "Professor Rowan"],
+    rightAnswer: "Professor Oak"
+  },
+  {
+    text: "What type is Mewtwo?",
+    answers: ["Psychic", "Dark", "Ghost", "Dragon"],
+    rightAnswer: "Psychic"
+  },
+  {
+    text: "What is the final evolution of Charmander?",
+    answers: ["Charmeleon", "Charizard", "Magmar", "Blaziken"],
+    rightAnswer: "Charizard"
+  },
+  {
+    text: "Who is the main protagonist of Digimon Adventure?",
+    answers: ["Matt Ishida", "Tai Kamiya", "Joe Kido", "T.K. Takaishi"],
+    rightAnswer: "Tai Kamiya"
+  },
+  {
+    text: "What is the name of Tai's partner Digimon?",
+    answers: ["Gabumon", "Patamon", "Agumon", "Tentomon"],
+    rightAnswer: "Agumon"
+  },
+  {
+    text: "In Digimon, what is the evolution process called?",
+    answers: ["Transformation", "Evolution", "Digivolution", "Metamorphosis"],
+    rightAnswer: "Digivolution"
+  },
+  {
+    text: "What is the name of the world where Digimon live?",
+    answers: ["Cyber World", "DigiWorld", "Digital World", "Net Realm"],
+    rightAnswer: "Digital World"
+  },
+  {
+    text: "Who is the main antagonist in the first season?",
+    answers: ["Devimon", "Myotismon", "Apocalymon", "Etemon"],
+    rightAnswer: "Apocalymon"
+  },
+  {
+    text: "Which series uses Poké Balls to capture creatures?",
+    answers: ["Digimon", "Both", "Pokémon", "Neither"],
+    rightAnswer: "Pokémon"
+  },
+  {
+    text: "Which series features creatures that speak human language more often?",
+    answers: ["Pokémon", "Digimon", "Both equally", "Neither"],
+    rightAnswer: "Digimon"
+  },
+  {
+    text: "In which series do creatures evolve temporarily during battles?",
+    answers: ["Digimon", "Pokémon", "Both", "Neither"],
+    rightAnswer: "Digimon"
+  },
+  {
+    text: "In which series do trainers capture and collect creatures?",
+    answers: ["Digimon", "Both", "Pokémon", "Neither"],
+    rightAnswer: "Pokémon"
+  },
+  {
+    text: "Which series was created first (as a franchise)?",
+    answers: ["Digimon", "Pokémon", "Both in the same year", "Neither"],
+    rightAnswer: "Pokémon"
+  }
+];
+
+const language = document.getElementById("language")
+
 const questionText = document.getElementById("question")
 
 const answersDiv = document.getElementById("answers")
@@ -101,8 +191,12 @@ let selectedAnswer = null;
 buttons.forEach((button) => button.addEventListener("click", function(e) {        // add event listeners to the buttons
     answerIsSelected = true;
     selectedAnswer = e.target.innerText;
-    customAlert.style.display = "none";             // alert hidden
+    customAlert.style.display = "none";        // alert hidden
 }))
+
+language.addEventListener("click", function() {
+    // toggle language
+})
 
 const finishQuiz = function() {
     // redirect to result page
@@ -184,5 +278,6 @@ nextQuestionButton.addEventListener("click", function() {       // add event lis
 
 
 getNextQuestion(currentQuestion);
+
 
 
