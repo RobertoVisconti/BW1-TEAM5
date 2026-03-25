@@ -80,7 +80,7 @@ footer p {
 }
 
 #alert-checkbox.alert-visible {
-  display: flex; /* Ora vince perché ID + Classe è più forte del solo ID */
+  display: flex;
 }
 
 /* Point on checkbox */
