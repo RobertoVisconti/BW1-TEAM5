@@ -1,7 +1,7 @@
 const results = JSON.parse(localStorage.getItem("quizResults")) || {
   totalQuestions: 10,
-  correctAnswers: 3,
-  wrongAnswers: 7,
+  correctAnswers: 7,
+  wrongAnswers: 3,
 };
 
 const rateBtn = document.getElementById("rate-us");
@@ -53,14 +53,18 @@ rateBtn.addEventListener("click", function () {
     }
 
     // Upgrade Chart
-    chartContent.classList.add("show-content");
-    const chart = document.getElementById("donut-chart");
-    chart.style.background =
-      "conic-gradient(#d21480 0% " +
-      wrongPct +
-      "%, #00ffff " +
-      wrongPct +
-      "% 100%)";
+    const chart = document.querySelector(".donut-chart");
+    let currentPercent = 0;
+
+    // Funzione per l'animazione di riempimento
+    const interval = setInterval(() => {
+      if (currentPercent >= wrongPct) {
+        clearInterval(interval);
+      } else {
+        currentPercent += 1; // Velocità dell'animazione
+        chart.style.setProperty("--percent", currentPercent + "%");
+      }
+    }, 15); // Fluidità in millisecondi
 
     hasCalculated = true;
   } else {
