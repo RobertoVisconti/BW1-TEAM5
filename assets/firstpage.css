@@ -7,14 +7,181 @@ h1 {
   text-align: center;
 }
 
-button {
+footer p {
+  font-size: 14px;
+  padding: 0.8em;
+}
+
+/* CSS START  */
+#container-function {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+#container-function > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Aumentato lo spazio tra immagine e checkbox */
+  margin-bottom: 1em;
+}
+
+/* Btn */
+.img-btn {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-form {
+.img-btn img {
+  width: 200px;
+  display: block;
+}
+
+.btn-expand {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+}
+
+/* --- Checkbox and alert --- */
+#checkbox-base {
+  position: relative;
   display: flex;
-  flex-direction: column-reverse;
   align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* --- alert design --- */
+#alert-checkbox {
+  background-color: white;
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #ccc;
+  font-size: 14px;
+
+  /* Position on checkbox */
+  position: absolute;
+  z-index: 100;
+  bottom: 140%;
+  left: -10px;
+
+  display: none;
+  align-items: center;
+  width: max-content;
+}
+
+#alert-checkbox.alert-visible {
+  display: flex;
+}
+
+/* Point on checkbox */
+#alert-checkbox::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 15px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white;
+}
+
+.attention {
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+/* Spunta custom */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#check {
+  display: none;
+}
+
+#check-ready {
+  position: relative;
+  display: block;
+  height: 25px;
+  width: 25px;
+  border: 2px solid white;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Effetto Riempimento Ciano */
+#check-ready:after {
+  content: "";
+  position: absolute;
+  width: 160%;
+  height: 160%;
+  background: cyan;
+  top: 100%;
+  left: -160%;
+  transition: all 0.4s ease-out;
+}
+
+/* Spunta ✔ */
+#check-ready:before {
+  content: "✔";
+  position: absolute;
+  left: 4px;
+  top: -2px;
+  color: black;
+  font-size: 20px;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.2s 0.4s;
+}
+
+#check:checked ~ #check-ready:after {
+  top: -30%;
+  left: -30%;
+}
+
+#check:checked ~ #check-ready:before {
+  opacity: 1;
+}
+
+#accepts-rules {
+  color: white;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.rain-drop {
+  position: fixed;
+  top: -60px;
+  z-index: 9999;
+  pointer-events: none;
+  width: 60px;
+  animation-name: fallAnimation;
+  animation-timing-function: linear;
+}
+
+@keyframes fallAnimation {
+  0% {
+    top: -60px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 110vh;
+    transform: rotate(360deg);
+  }
 }

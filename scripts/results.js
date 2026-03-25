@@ -1,22 +1,19 @@
-// 1. Recupero i dati dalla pagina del questionario ( per il momento c'è una prova)
 const results = JSON.parse(localStorage.getItem("quizResults")) || {
   totalQuestions: 10,
-  correctAnswers: 3,
-  wrongAnswers: 7,
+  correctAnswers: 7,
+  wrongAnswers: 3,
 };
 
 const rateBtn = document.getElementById("rate-us");
-let hasCalculated = false; // "Interruttore" per capire se abbiamo già cliccato
-let isPassed = false; // Memoria per il risultato del test
+let hasCalculated = false;
+let isPassed = false;
 
 rateBtn.addEventListener("click", function () {
   if (!hasCalculated) {
-    // --- PRIMO CLICK: CALCOLA E MOSTRA I RISULTATI ---
-
+    // --- Obtain Results ---
     const correctPct = (results.correctAnswers / results.totalQuestions) * 100;
     const wrongPct = 100 - correctPct;
 
-    // Calcolo se il test è superato
     isPassed = correctPct >= 60;
 
     const correctPercentEl = document.getElementById("correct-percent");
@@ -33,11 +30,10 @@ rateBtn.addEventListener("click", function () {
     document.getElementById("wrong-count").innerText =
       results.wrongAnswers + "/" + results.totalQuestions + " questions";
 
-    // Testo centrale della ciambella
+    // Chart text
     const chartContent = document.querySelector(".chart-center");
 
     if (isPassed) {
-      // In caso di superamento
       chartContent.innerHTML =
         "<h3 class='cyan-text'>Congratulations, Trainer/DigiDestined! 🎉</h3>" +
         "<p class='cyan-text'>You defeated the Pokémon League and took down the final Digimon boss without losing a single HP.</p>" +
@@ -45,7 +41,6 @@ rateBtn.addEventListener("click", function () {
 
       this.innerText = "GIVE A FEEDBACK";
     } else {
-      // In caso di fallimento ( Prof. Stefano con i suoi gatti ha vinto ancora)
       chartContent.innerHTML =
         "<h3 class='magenta-text'>Game Over… 💀</h3>" +
         "<p class='small-text'>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
@@ -57,23 +52,25 @@ rateBtn.addEventListener("click", function () {
       this.style.color = "#d21480";
     }
 
-    // Aggiornamento della ciambella
-    chartContent.classList.add("show-content");
-    const chart = document.getElementById("donut-chart");
-    chart.style.background =
-      "conic-gradient(#d21480 0% " +
-      wrongPct +
-      "%, #00ffff " +
-      wrongPct +
-      "% 100%)";
+    // Upgrade Chart
+    const chart = document.querySelector(".donut-chart");
+    let currentPercent = 0;
+
+    // Funzione per l'animazione di riempimento
+    const interval = setInterval(() => {
+      if (currentPercent >= wrongPct) {
+        clearInterval(interval);
+      } else {
+        currentPercent += 1; // Velocità dell'animazione
+        chart.style.setProperty("--percent", currentPercent + "%");
+      }
+    }, 15); // Fluidità in millisecondi
 
     hasCalculated = true;
   } else {
-    // --- SECONDO CLICK: REINDIRIZZAMENTO ---
     if (isPassed) {
       window.location.href = "feedback.html";
     } else {
-      // resetto e reindirizzo alla pagina dei quiz
       localStorage.removeItem("quizResults");
       window.location.href = "questions.html";
     }
