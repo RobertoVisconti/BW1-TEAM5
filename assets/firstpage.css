@@ -164,3 +164,24 @@ footer p {
   font-size: 1rem;
   white-space: nowrap;
 }
+
+.rain-drop {
+  position: fixed;
+  top: -60px; /* Parte da sopra lo schermo */
+  z-index: 9999;
+  pointer-events: none; /* Non disturba i click dell'utente */
+  width: 100em; /* Regola la grandezza delle immagini che cadono */
+  animation-name: fallAnimation;
+  animation-timing-function: linear;
+}
+
+@keyframes fallAnimation {
+  0% {
+    top: -60px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 110vh;
+    transform: rotate(360deg);
+  }
+}
