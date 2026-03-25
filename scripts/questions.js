@@ -270,7 +270,7 @@ const updateScore = function(selectedAnswer, index) {
         }
 
         console.log(answerData)
-        resultsArray.push(answerData) 
+        resultsArray.push(answerData)
 
     } else if (!selectedAnswer) {
 
@@ -286,6 +286,7 @@ const updateScore = function(selectedAnswer, index) {
 
         console.log(answerData)
         resultsArray.push(answerData)
+        
 
     } else if (selectedAnswer !== questions[currentLang][index].rightAnswer) {
 
@@ -301,7 +302,7 @@ const updateScore = function(selectedAnswer, index) {
 
         console.log(answerData)
         resultsArray.push(answerData)
-        
+
     }
 
 }
@@ -318,15 +319,28 @@ const getNextQuestion = function(n) {
 
         questionText.innerText = currentSet[n].text         //update question
            
-        for (let i = 0; i < buttons.length; i++) {              // update answers
+        for (let i = 0; i < buttons.length; i++) {  
+                        // update answers
             buttons[i].innerText = currentSet[n].answers[i]
+            buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
+                answerIsSelected = true;
+                selectedAnswer = e.target.innerText;
+                console.log(answerIsSelected)
+                console.log(selectedAnswer)
+                customAlert.style.display = "none";        // alert hidden
+            }))
+
+            buttons.forEach((button) => button.addEventListener("focusout", function(e) {
+                console.log(answerIsSelected)
+                console.log(selectedAnswer)
+                answerIsSelected = false;
+                selectedAnswer = null;
+        }))
+        
         }
-
-
         startTimer();
 
         remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}` // update remaining questions index
-
 
     } else {
 
