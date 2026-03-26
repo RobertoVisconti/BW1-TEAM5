@@ -68,12 +68,18 @@ const renderSummary = () => {
     resultsList.appendChild(li);
   });
 
-  // Show section
+  // --- MODIFICA QUI: GESTIONE DEL DELAY ---
   resultsContainer.style.display = "block";
+
+  // Aumentiamo il timeout a 1500ms per dare tempo al grafico di caricare
   setTimeout(() => {
     resultsContainer.style.opacity = "1";
-    resultsContainer.scrollIntoView({ behavior: "smooth" });
-  }, 100);
+    resultsContainer.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 1500);
+  // ---------------------------------------
 };
 
 // EVENT LISTENER
@@ -101,7 +107,7 @@ rateBtn.addEventListener("click", () => {
 
     if (isPassed) {
       if (lang === "en") {
-        chartContent.innerHTML = chartContent.innerHTML =
+        chartContent.innerHTML =
           "<h3 class='cyan-text'>Congratulations, Trainer/DigiDestined! 🎉</h3>" +
           "<p class='cyan-text'>You defeated the Pokémon League and took down the final Digimon boss without losing a single HP.</p>" +
           "<p class='small-text'>Get ready: you are officially a <strong>Master of the Nerd Multiverse 😎</strong></p>";
@@ -141,6 +147,7 @@ rateBtn.addEventListener("click", () => {
     const interval = setInterval(() => {
       if (currentPercent >= targetPercent) {
         clearInterval(interval);
+        // Richiama renderSummary che ora ha il ritardo per lo scroll
         renderSummary();
       } else {
         currentPercent += 1;
