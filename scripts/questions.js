@@ -358,6 +358,23 @@ buttons.forEach((button) => {
   });
 });
 
+document.addEventListener("click", function (e) {
+
+  const clickedInsideAnswers = answersDiv.contains(e.target);
+
+  if (!clickedInsideAnswers) {
+    
+    // remove selection visually
+    buttons.forEach(btn => btn.classList.remove("selected"));
+
+    // reset state
+    answerIsSelected = false;
+    selectedAnswer = null;
+
+    console.log("Selection cleared");
+  }
+});
+
 const getNextQuestion = function (n) {
   answerIsSelected = false;
   selectedAnswer = null;
