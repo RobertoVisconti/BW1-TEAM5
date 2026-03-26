@@ -236,10 +236,22 @@ language.addEventListener("click", function() {
     changeLanguage(currentQuestion)
 })
 
+
 const finishQuiz = function() {
-   const jsonData = JSON.stringify(resultsArray);
-   console.log(jsonData)
-}
+    const quizResultData = {
+        totalQuestions: questions[currentLang].length,
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers
+    };
+
+    // Salviamo nel "baule" del browser (localStorage)
+    localStorage.setItem("quizResults", JSON.stringify(quizResultData));
+
+    // Spostiamo l'utente alla pagina dei risultati
+    // NOTA: Assicurati che il nome del file HTML sia corretto!
+    window.location.href = "results.html"; 
+};
+
 
 const updateScore = function(selectedAnswer, index) {
     
