@@ -1,17 +1,19 @@
 // Music
 const audio = document.getElementById("musicDigimon");
-const avviaRiproduzione = function () {
+audio.volume = 0.4;
+const startReproduction = function () {
   audio
     .play()
     .then(function () {
-      console.log("Musica avviata correttamente");
+      console.log("Music sounds 40%");
     })
     .catch(function (error) {
-      console.log("Errore nell'avvio: ", error);
+      console.log("Error Start: ", error);
     });
-  document.removeEventListener("click", avviaRiproduzione);
+  document.removeEventListener("click", startReproduction);
 };
-document.addEventListener("click", avviaRiproduzione);
+document.addEventListener("click", startReproduction);
+
 const container = document.querySelector("footer div");
 const tuttiIFeedback = JSON.parse(localStorage.getItem("listaFeedback")) || [];
 container.innerHTML = "";
