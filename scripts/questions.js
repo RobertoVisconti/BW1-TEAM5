@@ -197,6 +197,8 @@ let wrongAnswers = 0
 
 const resultsArray = []
 
+
+
 let answerIsSelected = false;
 
 let selectedAnswer = null; 
@@ -238,12 +240,23 @@ language.addEventListener("click", function() {
 
 
 const finishQuiz = function() {
+    const finishQuiz = function () {
+    // Creiamo l'oggetto con i dati finali
+    const quizResultData = {
+        totalQuestions: questions[currentLang].length,
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers,
+        questionDetail: resultsArray
+    };
 
-    localStorage.setItem("quizResults", JSON.stringify(resultsArray));
+    // Salviamo nel "baule" del browser (localStorage)
+    localStorage.setItem("quizResults", JSON.stringify(quizResultData));
 
+    // Spostiamo l'utente alla pagina dei risultati
+    // NOTA: Assicurati che il nome del file HTML sia corretto!
     window.location.href = "results.html"; 
-};
-
+}
+}
 
 const updateScore = function(selectedAnswer, index) {
     
