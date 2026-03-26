@@ -298,25 +298,20 @@ const updateScore = function(selectedAnswer, index) {
 }
 
 
-for (let i = 0; i < buttons.length; i++) {  // update buttons answers
-    buttons[i].innerText = currentSet[n].answers[i]
-
 buttons.forEach((button) => {
     button.addEventListener("click", function(e) {
 
-    // remove previous selection
-    buttons.forEach(btn => btn.classList.remove("selected"));
+        // remove previous selection
+        buttons.forEach(btn => btn.classList.remove("selected"));
 
-    // highlight current selection
-    e.target.classList.add("selected");
+        // highlight selected
+        e.target.classList.add("selected");
 
-    // update state
-    answerIsSelected = true;
-    selectedAnswer = e.target.innerText;
+        // update state
+        answerIsSelected = true;
+        selectedAnswer = e.target.innerText;
 
-    console.log(selectedAnswer);
-
-    customAlert.style.display = "none";
+        customAlert.style.display = "none";
     });
 });
 
@@ -324,12 +319,10 @@ buttons.forEach((button) => {
 const getNextQuestion = function(n) {
 
     answerIsSelected = false;
-
     selectedAnswer = null;
-
     customAlert.style.display = "none";
 
-    // remove visual selection
+    // remove previous highlight
     buttons.forEach(btn => btn.classList.remove("selected"));
 
     const currentSet = questions[currentLang];
@@ -350,7 +343,6 @@ const getNextQuestion = function(n) {
         finishQuiz();
     }
 }
-
 nextQuestionButton.addEventListener("click", function() {       // add event listener to next question button
 
     if (answerIsSelected) {
