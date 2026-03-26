@@ -436,5 +436,3 @@ function startTimer() {
 
 getNextQuestion(currentQuestion)
 
-
-
