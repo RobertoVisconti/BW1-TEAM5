@@ -40,3 +40,7 @@ h1 {
 .box-feedback h2 {
   margin-bottom: 0.3em;
 }
+
+#musicDigimon {
+  display: none;
+}

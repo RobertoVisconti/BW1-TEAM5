@@ -1,4 +1,17 @@
-//main functionalities
+// Music
+const audio = document.getElementById("musicaPokemon");
+const avviaRiproduzione = function () {
+  audio
+    .play()
+    .then(function () {
+      console.log("Musica avviata correttamente");
+    })
+    .catch(function (error) {
+      console.log("Errore nell'avvio: ", error);
+    });
+  document.removeEventListener("click", avviaRiproduzione);
+};
+document.addEventListener("click", avviaRiproduzione);
 
 const questionsArray = [
   {
