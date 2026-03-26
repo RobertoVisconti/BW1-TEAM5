@@ -359,13 +359,11 @@ buttons.forEach((button) => {
 });
 
 document.addEventListener("click", function (e) {
-
   const clickedInsideAnswers = answersDiv.contains(e.target);
 
   if (!clickedInsideAnswers) {
-    
     // remove selection visually
-    buttons.forEach(btn => btn.classList.remove("selected"));
+    buttons.forEach((btn) => btn.classList.remove("selected"));
 
     // reset state
     answerIsSelected = false;

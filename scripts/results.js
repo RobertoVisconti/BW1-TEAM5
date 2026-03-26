@@ -78,7 +78,7 @@ const renderSummary = () => {
       behavior: "smooth",
       block: "start",
     });
-  }, 1500);
+  }, 5000);
   // ---------------------------------------
 };
 
