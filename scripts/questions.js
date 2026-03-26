@@ -197,15 +197,37 @@ let wrongAnswers = 0
 
 const resultsArray = []
 
-
-
 let answerIsSelected = false;
 
 let selectedAnswer = null; 
 
-const finalResults = {
+const logo = document.getElementById("getHome")
+logo.addEventListener("click", function() {
 
-}
+    if (currentLang === "en") {
+            customAlert.innerHTML = `<p>Are you sure you want to leave? You'll lose your progress.</p>
+          <button id="quitQuiz">Quit</button>
+          <button id="resumeQuiz">Resume</button>`
+
+        } else if (currentLang === "it") {
+
+        customAlert.innerHTML = `<p>Sei sicuro di voler abbandonare il quiz? Perderai tutti i progressi.</p>
+          <button id="quitQuiz">Abbandona</button>
+          <button id="resumeQuiz">Riprendi</button>`
+        }   
+
+    customAlert.style.display = "block"
+
+    const quit = document.getElementById("quitQuiz")     // alert button for skipping current question
+    quit.addEventListener("click", function() {
+        window.location.href = "welcome.html";
+    })
+
+    const resume = document.getElementById("resumeQuiz")        //alert button for resuming current question       
+    resume.addEventListener("click", function() {
+        customAlert.style.display = "none"
+    })
+})
 
 const changeLanguage = function(index) {
 
@@ -240,7 +262,6 @@ language.addEventListener("click", function() {
 
 
 const finishQuiz = function() {
-    const finishQuiz = function () {
     // Creiamo l'oggetto con i dati finali
     const quizResultData = {
         totalQuestions: questions[currentLang].length,
@@ -256,7 +277,7 @@ const finishQuiz = function() {
     // NOTA: Assicurati che il nome del file HTML sia corretto!
     window.location.href = "results.html"; 
 }
-}
+
 
 const updateScore = function(selectedAnswer, index) {
     
