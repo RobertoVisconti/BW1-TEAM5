@@ -101,26 +101,32 @@ rateBtn.addEventListener("click", () => {
 
     if (isPassed) {
       if (lang === "en") {
-        chartContent.innerHTML =
-          "<h3 class='cyan-text'>Congratulations! 🎉</h3>" +
-          "<p class='cyan-text'>Master of the Nerd Multiverse 😎</p>";
+        chartContent.innerHTML = chartContent.innerHTML =
+          "<h3 class='cyan-text'>Congratulations, Trainer/DigiDestined! 🎉</h3>" +
+          "<p class='cyan-text'>You defeated the Pokémon League and took down the final Digimon boss without losing a single HP.</p>" +
+          "<p class='small-text'>Get ready: you are officially a <strong>Master of the Nerd Multiverse 😎</strong></p>";
         rateBtn.innerText = "GIVE A FEEDBACK";
       } else {
         chartContent.innerHTML =
-          "<h3 class='cyan-text'>Congratulazioni! 🎉</h3>" +
-          "<p class='cyan-text'>Maestro del Multiverso Nerd 😎</p>";
+          "<h3 class='cyan-text'>Congratulazioni, Allenatore/Digiprescelto!</h3>" +
+          "<p class='cyan-text'>Hai battuto la Lega Pokémon e il boss finale dei Digimon senza perdere nemmeno un punto vita (HP).</p>" +
+          "<p class='small-text'>Preparati: ora sei ufficialmente un <strong>Maestro del Multiverso Nerd</strong></p>";
         rateBtn.innerText = "LASCIACI UN FEEDBACK";
       }
     } else {
       if (lang === "en") {
         chartContent.innerHTML =
           "<h3 class='magenta-text'>Game Over… 💀</h3>" +
-          "<p class='small-text'>Prof. Stefano: 'Try again!!!'</p>";
+          "<p>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
+          "<p class='magenta-text'>made entirely of cats with OP moves</p>" +
+          "<p class='small-text italic'>Prof. Stefano, while petting a cat, whispered: “You’re not ready yet. Try again!!!”</p>";
         rateBtn.innerText = "TRY AGAIN";
       } else {
         chartContent.innerHTML =
-          "<h3 class='magenta-text'>Game Over… 💀</h3>" +
-          "<p class='small-text'>Il Prof. Stefano sussurra: 'Riprova!!!'</p>";
+          "<h3 class='magenta-text'>Fine del gioco…</h3>" +
+          "<p>Hai sfidato la Lega Pokémon e la squadra del Professor Stefano ti ha battuto…</p>" +
+          "<p class='magenta-text'>era una squadra fatta solo di gatti con mosse fortissime</p>" +
+          "<p class='small-text italic'>Il Professor Stefano, mentre accarezzava un gatto, ha sussurrato: “Non sei ancora pronto. Riprova!!!”</p>";
         rateBtn.innerText = "RIPROVA";
       }
       rateBtn.style.borderColor = "#d21480";
