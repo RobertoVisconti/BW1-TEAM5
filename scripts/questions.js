@@ -238,17 +238,9 @@ language.addEventListener("click", function() {
 
 
 const finishQuiz = function() {
-    const quizResultData = {
-        totalQuestions: questions[currentLang].length,
-        correctAnswers: correctAnswers,
-        wrongAnswers: wrongAnswers
-    };
 
-    // Salviamo nel "baule" del browser (localStorage)
-    localStorage.setItem("quizResults", JSON.stringify(quizResultData));
+    localStorage.setItem("quizResults", JSON.stringify(resultsArray));
 
-    // Spostiamo l'utente alla pagina dei risultati
-    // NOTA: Assicurati che il nome del file HTML sia corretto!
     window.location.href = "results.html"; 
 };
 
@@ -305,48 +297,57 @@ const updateScore = function(selectedAnswer, index) {
 
 }
 
+
+for (let i = 0; i < buttons.length; i++) {  // update buttons answers
+    buttons[i].innerText = currentSet[n].answers[i]
+
+buttons.forEach((button) => {
+    button.addEventListener("click", function(e) {
+
+    // remove previous selection
+    buttons.forEach(btn => btn.classList.remove("selected"));
+
+    // highlight current selection
+    e.target.classList.add("selected");
+
+    // update state
+    answerIsSelected = true;
+    selectedAnswer = e.target.innerText;
+
+    console.log(selectedAnswer);
+
+    customAlert.style.display = "none";
+    });
+});
+
+
 const getNextQuestion = function(n) {
 
-    answerIsSelected = false
+    answerIsSelected = false;
 
     selectedAnswer = null;
 
-    customAlert.style.display = "none"; 
+    customAlert.style.display = "none";
 
-    const currentSet = questions[currentLang]
+    // remove visual selection
+    buttons.forEach(btn => btn.classList.remove("selected"));
+
+    const currentSet = questions[currentLang];
 
     if (n < currentSet.length) {
 
-        questionText.innerText = currentSet[n].text         //update question
-           
-        for (let i = 0; i < buttons.length; i++) {  // update 
-            buttons[i].innerText = currentSet[n].answers[i]
+        questionText.innerText = currentSet[n].text;
 
-            buttons.forEach((button) => button.addEventListener("focus", function(e) {        // add event listeners to the buttons
-                answerIsSelected = true;
-                selectedAnswer = e.target.innerText;
-                console.log(answerIsSelected)
-                console.log(selectedAnswer)
-                customAlert.style.display = "none";        // alert hidden
-            }))
-
-            buttons.forEach((button) => button.addEventListener("focusout", function(e) {
-                console.log(answerIsSelected)
-                console.log(selectedAnswer)
-                answerIsSelected = false;
-                selectedAnswer = null;
-        }))
-
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].innerText = currentSet[n].answers[i];
         }
 
         startTimer();
 
-        remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}` // update remaining questions index
+        remainingQuestions.innerHTML = `${currentQuestion+1}/${currentSet.length}`;
 
     } else {
-
-        finishQuiz()
-
+        finishQuiz();
     }
 }
 
