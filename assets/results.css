@@ -26,12 +26,11 @@ img {
   align-items: center;
 }
 
-/* --- GRAFICO ANIMATO --- */
+/* Chart Animation */
 .donut-chart {
-  width: 350px; /* Dimensione aumentata come da immagine */
+  width: 350px;
   height: 350px;
   border-radius: 50%;
-  /* Usa la variabile animata dal JS */
   background: conic-gradient(
     #d21480 0% var(--percent),
     #00ffff var(--percent) 100%
@@ -39,13 +38,13 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: --percent 1s ease-out; /* Transizione fluida */
+  transition: --percent 1s ease-out;
 }
 
 .chart-center {
   width: 280px;
   height: 280px;
-  background-color: #000835; /* Colore scuro dello sfondo */
+  background-color: #000835;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -63,7 +62,7 @@ img {
 }
 
 .percentage {
-  font-size: 3rem;
+  font-size: 32px;
   font-weight: bold;
 }
 
@@ -80,7 +79,7 @@ img {
   margin-top: 5px;
 }
 
-/* Bottoni */
+/* Btn */
 button {
   border: 2px solid white;
   color: white;
@@ -91,9 +90,67 @@ button {
   font-size: 20px;
   border-radius: 1em;
   transition: 0.3s;
+  margin-bottom: 1em;
 }
 
 button:active {
   border-color: #00ff00;
   box-shadow: 0px 0px 10px #00ff00;
+}
+
+#results-answer {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#results-answer.show-results {
+  display: block;
+  opacity: 1;
+}
+
+#results-answer h3 {
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.results-questions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.results-questions li {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 0.5em;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.results-questions li:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.summary-item .question-text {
+  margin-bottom: 1em;
+}
+
+.results-questions li hr {
+  display: none;
 }
