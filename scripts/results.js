@@ -1,7 +1,7 @@
 const results = JSON.parse(localStorage.getItem("quizResults")) || {
-  totalQuestions: 10,
-  correctAnswers: 7,
-  wrongAnswers: 3,
+  totalQuestions: 0,
+  correctAnswers: 0,
+  wrongAnswers: 0,
 };
 
 const rateBtn = document.getElementById("rate-us");
@@ -56,23 +56,50 @@ rateBtn.addEventListener("click", function () {
     const chart = document.querySelector(".donut-chart");
     let currentPercent = 0;
 
-    // Funzione per l'animazione di riempimento
     const interval = setInterval(() => {
       if (currentPercent >= wrongPct) {
         clearInterval(interval);
+
+        // --- AGGIUNTA: Mostra il riepilogo quando l'animazione finisce ---
+        renderSummary();
       } else {
-        currentPercent += 1; // Velocità dell'animazione
+        currentPercent += 1;
         chart.style.setProperty("--percent", currentPercent + "%");
       }
-    }, 15); // Fluidità in millisecondi
+    }, 15);
 
     hasCalculated = true;
   } else {
-    if (isPassed) {
-      window.location.href = "feedback.html";
-    } else {
-      localStorage.removeItem("quizResults");
-      window.location.href = "questions.html";
-    }
+    // ... (logica dei bottoni feedback/try again)
   }
 });
+
+// FUNZIONE PER RENDERIZZARE IL RIEPILOGO
+function renderSummary() {
+  const resultsContainer = document.getElementById("results-answer");
+  const resultsList = document.querySelector(".results-questions");
+
+  // Assicuriamoci che nel JSON ci sia l'array delle risposte (es: results.questionsList)
+  // Se il tuo JSON ha una struttura diversa, adatta il nome della proprietà qui sotto
+  const questionsData = results.questionsDetail || [];
+
+  resultsList.innerHTML = ""; // Pulisce eventuali residui
+
+  questionsData.forEach((item, index) => {
+    const li = document.createElement("li");
+    const isCorrect = item.userAnswer === item.correctAnswer;
+
+    li.innerHTML = `
+            <div class="summary-item">
+                <p class="question-text"><strong>${index + 1}. ${item.question}</strong></p>
+                <p>Tua risposta: <span class="${isCorrect ? "cyan-text" : "magenta-text"}">${item.userAnswer}</span></p>
+                ${!isCorrect ? `<p>Corretta: <span class="cyan-text">${item.correctAnswer}</span></p>` : ""}
+            </div>
+            <hr style="border: 0.5px solid #555; margin: 10px 0;">
+        `;
+    resultsList.appendChild(li);
+  });
+
+  // Mostra la sezione con un effetto fade (aggiungendo una classe CSS)
+  resultsContainer.classList.add("show-results");
+}
