@@ -313,8 +313,10 @@ const updateScore = function (selectedAnswer, index) {
 
     console.log(answerData);
     resultsArray.push(answerData);
+
   } else if (!selectedAnswer) {
     wrongAnswers++;
+
 
     let answerData = {
       text: questions[currentLang][index].text,
@@ -343,25 +345,25 @@ const updateScore = function (selectedAnswer, index) {
 };
 
 buttons.forEach((button) => {
+
   button.addEventListener("click", function (e) {
-    // remove previous selection
-    buttons.forEach((btn) => btn.classList.remove("selected"));
+  e.stopPropagation(); // 👈 important
 
-    // highlight selected
-    e.target.classList.add("selected");
+  buttons.forEach((btn) => btn.classList.remove("selected"));
+  e.target.classList.add("selected");
 
-    // update state
-    answerIsSelected = true;
-    selectedAnswer = e.target.innerText;
+  answerIsSelected = true;
+  selectedAnswer = e.target.innerText;
 
-    customAlert.style.display = "none";
-  });
+  customAlert.style.display = "none";
 });
 
-document.addEventListener("click", function (e) {
-  const clickedInsideAnswers = answersDiv.contains(e.target);
+})
 
-  if (!clickedInsideAnswers) {
+document.addEventListener("click", function (e) {
+  const clickedButton = e.target.closest("#answers button");
+
+  if (!clickedButton) {
     // remove selection visually
     buttons.forEach((btn) => btn.classList.remove("selected"));
 
@@ -465,10 +467,16 @@ function startTimer() {
     setCircleDashoffset();
 
     if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      updateScore(selectedAnswer, currentQuestion);
-      currentQuestion++;
-      getNextQuestion(currentQuestion);
+        clearInterval(timerInterval);
+
+        // 🔥 force clear selection BEFORE moving on
+        buttons.forEach((btn) => btn.classList.remove("selected"));
+        answerIsSelected = false;
+        selectedAnswer = null;
+
+        updateScore(selectedAnswer, currentQuestion);
+        currentQuestion++;
+        getNextQuestion(currentQuestion);
     }
   }, 1000);
 }

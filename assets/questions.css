@@ -107,11 +107,14 @@ main button:hover {
   cursor: pointer;
 }
 
-#answers button:focus {
+button.selected {
   border: 5px solid #ff00b3b5;
   outline: none;
   box-shadow: 0 0 20px 5px #ff00b3b5;
 }
+
+/*#answers button:focus {
+}*/
 
 #q-a {
   box-sizing: border-box;
