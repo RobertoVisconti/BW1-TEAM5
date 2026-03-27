@@ -13,12 +13,11 @@ const resultsList = document.querySelector(".results-questions");
 let hasCalculated = false;
 let isPassed = false;
 
-// Results
+// --- FUNZIONE RENDERING DETTAGLI ---
 const renderSummary = () => {
   const questionsData = results.questionDetail || [];
   const lang = results.language || "it";
 
-  // Translate
   const labels = {
     it: {
       user: "Tua risposta: ",
@@ -34,7 +33,6 @@ const renderSummary = () => {
     const li = document.createElement("li");
     const isCorrect = item.result === "correct";
     const colorClass = isCorrect ? "cyan-text" : "magenta-text";
-
     const userAns = item.selected ? item.selected : labels[lang].none;
 
     let htmlContent =
@@ -68,101 +66,104 @@ const renderSummary = () => {
     resultsList.appendChild(li);
   });
 
-  // --- MODIFICA QUI: GESTIONE DEL DELAY ---
   resultsContainer.style.display = "block";
 
-  // Aumentiamo il timeout a 1500ms per dare tempo al grafico di caricare
+  // Ho ridotto leggermente il delay a 3000ms (3 secondi) perché 5 sembravano troppi,
+  // ma puoi rimettere 5000 se preferisci un'attesa più lunga.
   setTimeout(() => {
     resultsContainer.style.opacity = "1";
     resultsContainer.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  }, 5000);
-  // ---------------------------------------
+  }, 3000);
 };
 
-// EVENT LISTENER
-rateBtn.addEventListener("click", () => {
-  if (!hasCalculated) {
-    const total = results.totalQuestions || 1;
-    const correctPct = (results.correctAnswers / total) * 100;
-    const wrongPct = 100 - correctPct;
-    const lang = results.language || "it";
+// --- FUNZIONE DI CALCOLO AUTOMATICO ---
+const calculateResults = () => {
+  if (hasCalculated) return;
 
-    isPassed = correctPct >= 60;
+  const total = results.totalQuestions || 1;
+  const correctPct = (results.correctAnswers / total) * 100;
+  const wrongPct = 100 - correctPct;
+  const lang = results.language || "it";
 
-    // Ui
-    document.getElementById("correct-percent").innerText =
-      correctPct.toFixed(1) + "%";
-    document.getElementById("wrong-percent").innerText =
-      wrongPct.toFixed(1) + "%";
-    document.getElementById("correct-count").innerText =
-      results.correctAnswers + "/" + total + " questions";
-    document.getElementById("wrong-count").innerText =
-      results.wrongAnswers + "/" + total + " questions";
+  isPassed = correctPct >= 60;
 
-    // Chart Text
-    const chartContent = document.querySelector(".chart-center");
+  // Aggiornamento UI testi percentuali
+  document.getElementById("correct-percent").innerText =
+    correctPct.toFixed(1) + "%";
+  document.getElementById("wrong-percent").innerText =
+    wrongPct.toFixed(1) + "%";
+  document.getElementById("correct-count").innerText =
+    results.correctAnswers + "/" + total + " questions";
+  document.getElementById("wrong-count").innerText =
+    results.wrongAnswers + "/" + total + " questions";
 
-    if (isPassed) {
-      if (lang === "en") {
-        chartContent.innerHTML =
-          "<h3 class='cyan-text'>Congratulations, Trainer/DigiDestined! 🎉</h3>" +
-          "<p class='cyan-text'>You defeated the Pokémon League and took down the final Digimon boss without losing a single HP.</p>" +
-          "<p class='small-text'>Get ready: you are officially a <strong>Master of the Nerd Multiverse 😎</strong></p>";
-        rateBtn.innerText = "GIVE A FEEDBACK";
-      } else {
-        chartContent.innerHTML =
-          "<h3 class='cyan-text'>Congratulazioni, Allenatore/Digiprescelto!</h3>" +
-          "<p class='cyan-text'>Hai battuto la Lega Pokémon e il boss finale dei Digimon senza perdere nemmeno un punto vita (HP).</p>" +
-          "<p class='small-text'>Preparati: ora sei ufficialmente un <strong>Maestro del Multiverso Nerd</strong></p>";
-        rateBtn.innerText = "LASCIACI UN FEEDBACK";
-      }
+  const chartContent = document.querySelector(".chart-center");
+
+  // Logica testi in base al risultato
+  if (isPassed) {
+    if (lang === "en") {
+      chartContent.innerHTML =
+        "<h3 class='cyan-text'>Congratulations, Trainer/DigiDestined! 🎉</h3>" +
+        "<p class='cyan-text'>You defeated the Pokémon League and took down the final Digimon boss without losing a single HP.</p>" +
+        "<p class='small-text'>Get ready: you are officially a <strong>Master of the Nerd Multiverse 😎</strong></p>";
+      rateBtn.innerText = "GIVE A FEEDBACK";
     } else {
-      if (lang === "en") {
-        chartContent.innerHTML =
-          "<h3 class='magenta-text'>Game Over… 💀</h3>" +
-          "<p>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
-          "<p class='magenta-text'>made entirely of cats with OP moves</p>" +
-          "<p class='small-text italic'>Prof. Stefano, while petting a cat, whispered: “You’re not ready yet. Try again!!!”</p>";
-        rateBtn.innerText = "TRY AGAIN";
-      } else {
-        chartContent.innerHTML =
-          "<h3 class='magenta-text'>Fine del gioco…</h3>" +
-          "<p>Hai sfidato la Lega Pokémon e la squadra del Professor Stefano ti ha battuto…</p>" +
-          "<p class='magenta-text'>era una squadra fatta solo di gatti con mosse fortissime</p>" +
-          "<p class='small-text italic'>Il Professor Stefano, mentre accarezzava un gatto, ha sussurrato: “Non sei ancora pronto. Riprova!!!”</p>";
-        rateBtn.innerText = "RIPROVA";
-      }
-      rateBtn.style.borderColor = "#d21480";
-      rateBtn.style.color = "#d21480";
+      chartContent.innerHTML =
+        "<h3 class='cyan-text'>Congratulazioni, Allenatore/Digiprescelto!</h3>" +
+        "<p class='cyan-text'>Hai battuto la Lega Pokémon e il boss finale dei Digimon senza perdere nemmeno un punto vita (HP).</p>" +
+        "<p class='small-text'>Preparati: ora sei ufficialmente un <strong>Maestro del Multiverso Nerd</strong></p>";
+      rateBtn.innerText = "LASCIACI UN FEEDBACK";
     }
-
-    // Chart Animation
-    const chart = document.querySelector(".donut-chart");
-    let currentPercent = 0;
-    const targetPercent = Math.floor(wrongPct);
-
-    const interval = setInterval(() => {
-      if (currentPercent >= targetPercent) {
-        clearInterval(interval);
-        // Richiama renderSummary che ora ha il ritardo per lo scroll
-        renderSummary();
-      } else {
-        currentPercent += 1;
-        chart.style.setProperty("--percent", currentPercent + "%");
-      }
-    }, 15);
-
-    hasCalculated = true;
   } else {
-    // Second Click
-    if (isPassed) {
-      window.location.href = "feedback.html";
+    if (lang === "en") {
+      chartContent.innerHTML =
+        "<h3 class='magenta-text'>Game Over… 💀</h3>" +
+        "<p>You challenged the Pokémon League and got defeated by Prof. Stefano’s team…</p>" +
+        "<p class='magenta-text'>made entirely of cats with OP moves</p>" +
+        "<p class='small-text italic'>Prof. Stefano, while petting a cat, whispered: “You’re not ready yet. Try again!!!”</p>";
+      rateBtn.innerText = "TRY AGAIN";
     } else {
-      localStorage.removeItem("quizResults");
-      window.location.href = "questions.html";
+      chartContent.innerHTML =
+        "<h3 class='magenta-text'>Fine del gioco…</h3>" +
+        "<p>Hai sfidato la Lega Pokémon e la squadra del Professor Stefano ti ha battuto…</p>" +
+        "<p class='magenta-text'>era una squadra fatta solo di gatti con mosse fortissime</p>" +
+        "<p class='small-text italic'>Il Professor Stefano, mentre accarezzava un gatto, ha sussurrato: “Non sei ancora pronto. Riprova!!!”</p>";
+      rateBtn.innerText = "RIPROVA";
     }
+    rateBtn.style.borderColor = "#d21480";
+    rateBtn.style.color = "#d21480";
+  }
+
+  // Animazione del grafico
+  const chart = document.querySelector(".donut-chart");
+  let currentPercent = 0;
+  const targetPercent = Math.floor(wrongPct);
+
+  const interval = setInterval(() => {
+    if (currentPercent >= targetPercent) {
+      clearInterval(interval);
+      renderSummary(); // Mostra la lista risposte dopo il grafico
+    } else {
+      currentPercent += 1;
+      chart.style.setProperty("--percent", currentPercent + "%");
+    }
+  }, 15);
+
+  hasCalculated = true;
+};
+
+// --- ATTIVAZIONE AL CARICAMENTO ---
+window.addEventListener("DOMContentLoaded", calculateResults);
+
+// --- GESTIONE CLICK SUL BOTTONE (SOLO NAVIGAZIONE) ---
+rateBtn.addEventListener("click", () => {
+  if (isPassed) {
+    window.location.href = "feedback.html";
+  } else {
+    localStorage.removeItem("quizResults");
+    window.location.href = "questions.html";
   }
 });
