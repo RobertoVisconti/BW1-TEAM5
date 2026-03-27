@@ -3,7 +3,7 @@ const results = JSON.parse(localStorage.getItem("quizResults")) || {
   correctAnswers: 0,
   wrongAnswers: 0,
   questionDetail: [],
-  language: currentLang,
+  language: "it",
 };
 
 const rateBtn = document.getElementById("rate-us");
@@ -68,8 +68,6 @@ const renderSummary = () => {
 
   resultsContainer.style.display = "block";
 
-  // Ho ridotto leggermente il delay a 3000ms (3 secondi) perché 5 sembravano troppi,
-  // ma puoi rimettere 5000 se preferisci un'attesa più lunga.
   setTimeout(() => {
     resultsContainer.style.opacity = "1";
     resultsContainer.scrollIntoView({
@@ -79,7 +77,6 @@ const renderSummary = () => {
   }, 3000);
 };
 
-// --- FUNZIONE DI CALCOLO AUTOMATICO ---
 const calculateResults = () => {
   if (hasCalculated) return;
 
@@ -88,21 +85,46 @@ const calculateResults = () => {
   const wrongPct = 100 - correctPct;
   const lang = results.language || "it";
 
-  isPassed = correctPct >= 60;
+  // --- AGGIUNTA TRADUZIONI ---
+  const uiLabels = {
+    it: {
+      resultsTitle: "Risultati",
+      summary: "Il riepilogo delle tue risposte:",
+      correct: "Corrette",
+      wrong: "Sbagliate",
+      questions: "domande",
+    },
+    en: {
+      resultsTitle: "Results",
+      summary: "The summary of your answers:",
+      correct: "Correct",
+      wrong: "Wrong",
+      questions: "questions",
+    },
+  };
 
-  // Aggiornamento UI testi percentuali
+  const currentLabels = uiLabels[lang];
+
+  // Traduzione Titoli
+  document.querySelector("#title-page h2").innerText =
+    currentLabels.resultsTitle;
+  document.querySelector("#title-page p").innerText = currentLabels.summary;
+  document.querySelector("#correct-left h2").innerText = currentLabels.correct;
+  document.querySelector("#wrong-right h2").innerText = currentLabels.wrong;
+
+  // Aggiornamento Percentuali e Conteggi (Senza backtick)
   document.getElementById("correct-percent").innerText =
     correctPct.toFixed(1) + "%";
   document.getElementById("wrong-percent").innerText =
     wrongPct.toFixed(1) + "%";
   document.getElementById("correct-count").innerText =
-    results.correctAnswers + "/" + total + " questions";
+    results.correctAnswers + "/" + total + " " + currentLabels.questions;
   document.getElementById("wrong-count").innerText =
-    results.wrongAnswers + "/" + total + " questions";
+    results.wrongAnswers + "/" + total + " " + currentLabels.questions;
 
+  isPassed = correctPct >= 60;
   const chartContent = document.querySelector(".chart-center");
 
-  // Logica testi in base al risultato
   if (isPassed) {
     if (lang === "en") {
       chartContent.innerHTML =
@@ -137,7 +159,6 @@ const calculateResults = () => {
     rateBtn.style.color = "#d21480";
   }
 
-  // Animazione del grafico
   const chart = document.querySelector(".donut-chart");
   let currentPercent = 0;
   const targetPercent = Math.floor(wrongPct);
@@ -145,7 +166,7 @@ const calculateResults = () => {
   const interval = setInterval(() => {
     if (currentPercent >= targetPercent) {
       clearInterval(interval);
-      renderSummary(); // Mostra la lista risposte dopo il grafico
+      renderSummary();
     } else {
       currentPercent += 1;
       chart.style.setProperty("--percent", currentPercent + "%");
@@ -155,10 +176,8 @@ const calculateResults = () => {
   hasCalculated = true;
 };
 
-// --- ATTIVAZIONE AL CARICAMENTO ---
 window.addEventListener("DOMContentLoaded", calculateResults);
 
-// --- GESTIONE CLICK SUL BOTTONE (SOLO NAVIGAZIONE) ---
 rateBtn.addEventListener("click", () => {
   if (isPassed) {
     window.location.href = "feedback.html";
